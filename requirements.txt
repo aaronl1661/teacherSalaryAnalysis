@@ -1,2 +1,8 @@
 pandas
 requests
+statsmodels
+scikit-learn
+pathlib
+matplotlib
+ggplot
+scipy
