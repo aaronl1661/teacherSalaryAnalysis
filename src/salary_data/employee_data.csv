@@ -1,4 +1,4 @@
-Employee,Years Taught,Salaries,Departments
+name,years_taught,salaries,departments
 EAMAN KARIM,"[2018, 2019]","[48000.0, 48960.0]","['ENGR', 'ENGR']"
 MICHAEL A'HEARN,"[2013, 2014, 2015, 2016, 2017]","[125817.0, 130849.69, 145530.01, 155925.01, 135810.69]","['CMNS', 'CMNS', 'CMNS', 'CMNS', 'CMNS']"
 MOHAMMED AMIN,[2015],[46500.0],['CMNS']
