@@ -1,3 +1,4 @@
+
 College of Agriculture and Natural Resources
 AGNR
 Agricultural and Resource Economics
@@ -143,7 +144,22 @@ Materials Science and Engineering
 Mechanical Engineering
 
 College of Information Studies
-
+INFO
 Information Science
 Social Data Science
 Technology and Information Design
+
+Philip Merrill College of Journalism
+JOUR
+Journalism
+
+School of Public Health
+SPHL
+Community Health
+Family Science
+Kinesiology
+Public Health Science
+
+School of Public Policy
+PLCY
+Public Policy
