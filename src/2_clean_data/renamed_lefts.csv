@@ -1,2 +1,3 @@
 name,course,semester,average_rating,num_reviews,average_gpa,num_students,years_taught,salaries,departments,real_name(s),_merge
 EBONIE COOPER,"['PLCY302', 'PLCY213', 'PLCY213', 'PLCY302', 'PLCY310', 'PLCY400', 'PLCY689Y']","['spring 2023', 'fall 2022', 'spring 2022', 'spring 2022', 'spring 2022', 'fall 2022', 'fall 2022']","[1.0, nan, nan, nan, nan, nan, nan]","[1.0, nan, nan, nan, nan, nan, nan]","[nan, 3.32, 2.87, 2.38, 3.49, 3.23, 3.58]","[0, 36, 27, 23, 25, 18, 20]",,,,,left_only
+NAGHMEH TARAMSARI,"['INST414', 'INST462']","['fall 2021', 'fall 2021']","[1.0, 1.0]","[1.0, 2.0]","[3.73, 3.56]","[42, 144]",,,,,left_only
