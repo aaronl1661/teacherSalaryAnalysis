@@ -14591,7 +14591,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14603,7 +14603,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14617,18 +14617,40 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h1><p>We first need to collect data that is relevant to our study. To get grade distributions and student reviews, we made GET requests to the <a href="https://planetterp.com/api/">PlanetTerp API</a> and stored the data as JSON objects.</p>
+<h1 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Imports">Imports<a class="anchor-link" href="#Imports">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>These are the various libraries that will be used throughout the course of this tutorial. This project utilizes Python and Jupyter notebook, with the goal being to use the <a href="https://pandas.pydata.org/">Pandas</a> library. This library allows us to store data in dataframes, allowing us to manipulate the data that we have efficiently and effectively, making it one the most important and frequently used libraries in this tutorial. The various other libraries help us retrieve, manage, and analyze our data.</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14636,12 +14658,2036 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">statsmodels.formula.api</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">linear_model</span>
+<span class="kn">from</span> <span class="nn">ggplot</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ast</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="PlanetTerp">PlanetTerp<a class="anchor-link" href="#PlanetTerp">&#182;</a></h3><p>Since we are looking for information on a professor's grade distributions and student-made reviews of that professor, <a href="https://planetterp.com/">PlanetTerp</a> was a natural place to look for the information we needed. The data there is specific to UMD and the website itself was made by students, who were generous enough to provide us a <a href="https://planetterp.com/api/">documented API</a> that we could use. We used GET requests to the PlanetTerp API in order to get the information from the website, before storing it into dataframes. However, we quickly discovered that performing all of these requests could take excessive amounts of time. As such, we decided to store our data into csv files and then read from those files locally rather than constantly re-requesting the website. We did this by checking if our csv files already existed, and if they did we could simply read from those files, only requesting from the site if the csv files we were looking for didn't exist. As such, all of the data used from here on out in this tutorial will be accurate up until April 28th, 2023, as that is the last time we actually requested information from PlanetTerp itself.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reviews_exist</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_review_data.csv&quot;</span><span class="p">)</span>
+<span class="n">grades_exist</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_grade_data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">reviews_exist</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">reviews</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># maximum limit is 100, keep requesting until all of the data has been collected</span>
+    <span class="k">while</span> <span class="n">done</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://planetterp.com/api/v1/professors&quot;</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span><span class="n">offset</span><span class="p">,</span> <span class="s2">&quot;reviews&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;limit&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">},)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">reviews</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">offset</span><span class="o">+</span><span class="mi">100</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># separate out data, each review gets its own row</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reviews</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reviews&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reviews&quot;</span><span class="p">):</span>
+                    <span class="c1"># only add review if it is for a professor, not a TA, and there is a course attached to it</span>
+                    <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;course&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;professor&quot;</span><span class="p">:</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;slug&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;slug&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;course&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;review&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;review&quot;</span><span class="p">)</span>
+                        <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;created&quot;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+                        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;course&quot;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/PT_review_data.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">grades_exist</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">grades</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">professors</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+    <span class="c1"># get grade data for each professor</span>
+    <span class="k">for</span> <span class="n">prof</span> <span class="ow">in</span> <span class="n">professors</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://planetterp.com/api/v1/grades&quot;</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span><span class="n">offset</span><span class="p">,</span> <span class="s2">&quot;reviews&quot;</span><span class="p">:</span> <span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;limit&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;professor&quot;</span><span class="p">:</span> <span class="n">prof</span><span class="p">})</span>
+        <span class="n">grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="n">grade_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># each semester of each course gets its own row in the dataframe</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;professor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;professor&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;course&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;semester&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;semester&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;section&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;section&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;A+&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;A+&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;A-&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;A-&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;B+&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;B+&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;B-&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;B-&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;C+&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;C+&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;C-&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;C-&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;D+&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D+&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;D-&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;D-&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;W&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+                <span class="n">grade_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;Other&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Other&quot;</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="n">grade_df</span> <span class="o">=</span> <span class="n">grade_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;professor&quot;</span><span class="p">,</span><span class="s2">&quot;course&quot;</span><span class="p">])</span>
+    <span class="n">grade_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/PT_grade_data.csv&quot;</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Diamondback">Diamondback<a class="anchor-link" href="#Diamondback">&#182;</a></h3><p>The other information that we need is a way to find out how much a teacher is earning, as well as a general estimate for how long they've been teaching at the University of Maryland. <a href="https://dbknews.com/">The Diamondback</a> publishes a yearly <a href="https://salaryguide.dbknews.com/">salary guide</a>, which has its own <a href="https://api.dbknews.com/docs/#/salary">API</a>. From here, we were then able to perform the same process, using GET requests to read the salary data for each year from 2013 to 2022. This information not only tells us how much a certain professor got paid each year, but also allows us to deduct how long a professor has been working at UMD based on how many years they were getting paid. We also performed the same procedure of writing our data to csv files to read from locally, as all of these requests also took very long to perform. As such, like with PlanetTerp, the data used from here on out is accurate up until April 28th, 2023.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salaries_exist</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/salary_data/DB_combined_data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">salaries</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">salaries</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">salaries</span><span class="p">]</span>
+    <span class="n">departments</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">years</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">years</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">salaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">salaries</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">salaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">salaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">salaries</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">years</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">salaries</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">departments</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+        <span class="s1">&#39;years_taught&#39;</span><span class="p">:</span> <span class="n">years</span><span class="p">,</span>
+        <span class="s1">&#39;salaries&#39;</span><span class="p">:</span> <span class="n">salaries</span><span class="p">,</span>
+        <span class="s1">&#39;departments&#39;</span><span class="p">:</span> <span class="n">departments</span><span class="p">,</span>
+    <span class="p">})</span>
+
+<span class="k">if</span> <span class="n">salaries_exist</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="c1"># get years that api is valid for</span>
+    <span class="n">r_years</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.dbknews.com/salary/years&quot;</span><span class="p">)</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">r_years</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># for each year, get salary data</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># number of faculty</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">page</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># get salary data for 1 page</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">page_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+
+            <span class="c1"># remove division and title columns, modify department col, and add year</span>
+            <span class="n">page_df</span> <span class="o">=</span> <span class="n">page_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">year_df</span><span class="p">,</span> <span class="n">page_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;year </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> finished&quot;</span><span class="p">)</span>
+        <span class="n">year_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># get data for all of the years into one dataframe</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">)</span>
+        <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">year_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># combine all of the information for a single professor into one row</span>
+    <span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Employee&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">combine</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+    <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+    <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/DB_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reviews_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_review_data.csv&quot;</span><span class="p">)</span>
+<span class="n">grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_grade_data.csv&quot;</span><span class="p">)</span>
+<span class="n">salaries_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/salary_data/DB_combined_data.csv&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reviews_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>slug</th>
+      <th>type</th>
+      <th>course</th>
+      <th>rating</th>
+      <th>review</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>anthony</td>
+      <td>professor</td>
+      <td>AMST203</td>
+      <td>1.0</td>
+      <td>By far the worst professor I’ve ever had, and ...</td>
+      <td>2018-08-17</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Kruglanski</td>
+      <td>kruglanski</td>
+      <td>professor</td>
+      <td>PSYC489H</td>
+      <td>2.0</td>
+      <td>DO NOT TAKE PSYC489H "Motivated Social Cogniti...</td>
+      <td>2015-09-07</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>2.0</td>
+      <td>Very boring, it's hard to maintain your focus ...</td>
+      <td>2019-04-04</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>1.0</td>
+      <td>You'll pass but this class will be the most bo...</td>
+      <td>2019-05-26</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>1.0</td>
+      <td>Rather difficult course. Class is extremely bo...</td>
+      <td>2019-12-08</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">grades_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>professor</th>
+      <th>course</th>
+      <th>semester</th>
+      <th>section</th>
+      <th>A+</th>
+      <th>A</th>
+      <th>A-</th>
+      <th>B+</th>
+      <th>B</th>
+      <th>B-</th>
+      <th>C+</th>
+      <th>C</th>
+      <th>C-</th>
+      <th>D+</th>
+      <th>D</th>
+      <th>D-</th>
+      <th>F</th>
+      <th>W</th>
+      <th>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>AMST202</td>
+      <td>201608</td>
+      <td>0101</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Anthony</td>
+      <td>AMST202</td>
+      <td>201701</td>
+      <td>0101</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>7.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>201708</td>
+      <td>FCH1</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>201708</td>
+      <td>FCH2</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>201801</td>
+      <td>0201</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>2.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salaries_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Employee</th>
+      <th>years_taught</th>
+      <th>salaries</th>
+      <th>departments</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Karim, Eaman</td>
+      <td>[2018, 2019]</td>
+      <td>[48000.0, 48960.0]</td>
+      <td>['ENGR', 'ENGR']</td>
+      <td>EAMAN KARIM</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A'Hearn, Michael F.</td>
+      <td>[2013, 2014, 2015, 2016, 2017]</td>
+      <td>[125817.0, 130849.69, 145530.01, 155925.01, 13...</td>
+      <td>['CMNS', 'CMNS', 'CMNS', 'CMNS', 'CMNS']</td>
+      <td>MICHAEL A'HEARN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AMIN, MOHAMMED NURUL</td>
+      <td>[2015]</td>
+      <td>[46500.0]</td>
+      <td>['CMNS']</td>
+      <td>MOHAMMED AMIN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Aarhus, William H</td>
+      <td>[2016, 2017, 2018, 2019, 2020, 2021, 2022]</td>
+      <td>[75000.0, 75750.0, 75750.0, 77265.0, 80780.68,...</td>
+      <td>['SVPA', 'SVPA', 'SVPA', 'SVPA', 'SVPA', 'EXST...</td>
+      <td>WILLIAM AARHUS</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Abadi, Berhane</td>
+      <td>[2022]</td>
+      <td>[31278.0]</td>
+      <td>['VPSA']</td>
+      <td>BERHANE ABADI</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Combining-PlanetTerp-Data">Combining PlanetTerp Data<a class="anchor-link" href="#Combining-PlanetTerp-Data">&#182;</a></h3><p>Eventually, we would like to have all of our data come together into one single dataframe for us to manipulate. Since student reviews and grades are currently being stored in separate dataframes, the first step towards our end goal is logically to combine these two dataframes into one, as they both come from the same data source. We would like to separate all of the data we currently have, grouping them by a specific course taught by a specific professor in a specific semester. The grade data from PlanetTerp is stored in this format, with each professor's classes being separated out into every semester they taught the class. However, the reviews left on the website don't have the semester that the student took the class in listed. As such, we have to make assumptions for what semester a student took the class they are reviewing based on the date that they left their review. We assume any review left from September to December are for fall classes, January are for winter classes, February to May are for spring classes, and June to August are for summer classes.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="c1">#getting the month from date formatted as YYYY-MM-DD</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fall&quot;</span>
+    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;01&quot;</span><span class="p">:</span>
+        <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;winter&quot;</span>
+    <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;06&quot;</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;07&quot;</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">])[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;08&quot;</span> <span class="p">:</span>
+        <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;summer&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;spring&quot;</span>
+
+<span class="n">reviews_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>slug</th>
+      <th>type</th>
+      <th>course</th>
+      <th>rating</th>
+      <th>review</th>
+      <th>date</th>
+      <th>year</th>
+      <th>season</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>anthony</td>
+      <td>professor</td>
+      <td>AMST203</td>
+      <td>1.0</td>
+      <td>By far the worst professor I’ve ever had, and ...</td>
+      <td>2018-08-17</td>
+      <td>2018</td>
+      <td>summer</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Kruglanski</td>
+      <td>kruglanski</td>
+      <td>professor</td>
+      <td>PSYC489H</td>
+      <td>2.0</td>
+      <td>DO NOT TAKE PSYC489H "Motivated Social Cogniti...</td>
+      <td>2015-09-07</td>
+      <td>2015</td>
+      <td>fall</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>2.0</td>
+      <td>Very boring, it's hard to maintain your focus ...</td>
+      <td>2019-04-04</td>
+      <td>2019</td>
+      <td>spring</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>1.0</td>
+      <td>You'll pass but this class will be the most bo...</td>
+      <td>2019-05-26</td>
+      <td>2019</td>
+      <td>spring</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Sharma</td>
+      <td>sharma_a</td>
+      <td>professor</td>
+      <td>ASTR300</td>
+      <td>1.0</td>
+      <td>Rather difficult course. Class is extremely bo...</td>
+      <td>2019-12-08</td>
+      <td>2019</td>
+      <td>fall</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We then group all of the reviews for a certain professor's class that were detected to be from the same semester together, averaging out the ratings for that semester.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sort by the following to ensure that reviews corresponding to the same semester get grouped together</span>
+<span class="n">reviews_df</span> <span class="o">=</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">],</span> <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">average_reviews_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="n">values_to_check</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span>
+<span class="n">curr</span> <span class="o">=</span> <span class="p">[</span><span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">],</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">averages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="c1"># see if the next row in the dataframe is for the current semester</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+        <span class="c1"># once it is not a match, write the current accumulated information to the dataframe and reset</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;average_rating&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;num_reviews&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">]</span>
+    <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># add in the last row</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;average_rating&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">average_reviews_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;num_reviews&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">average_reviews_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>course</th>
+      <th>year</th>
+      <th>season</th>
+      <th>average_rating</th>
+      <th>num_reviews</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>2018</td>
+      <td>summer</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Kruglanski</td>
+      <td>PSYC489H</td>
+      <td>2015</td>
+      <td>fall</td>
+      <td>2.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2019</td>
+      <td>fall</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2019</td>
+      <td>spring</td>
+      <td>1.5</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2020</td>
+      <td>fall</td>
+      <td>2.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The semester information for grades are stored implicitly on PlanetTerp. The format is year, followed by either 08 or 01, corresponding to either fall or spring semester. For example, grade information for the fall 2021 semester would be stored under the tag of 202108. As such, we can extract this information and continue with the same process as above, grouping grades from semesters that are the same together</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;semester&quot;</span><span class="p">])[:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;semester&quot;</span><span class="p">])[</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s2">&quot;08&quot;</span><span class="p">:</span>
+        <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;fall&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;spring&quot;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># sort by the following to ensure that grades corresponding to the same semester get grouped together</span>
+<span class="n">grades_df</span> <span class="o">=</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;professor&quot;</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">],</span> <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">average_grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="c1"># GPA values for each letter grade</span>
+<span class="n">gpa</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A+&quot;</span><span class="p">:</span><span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">:</span><span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;A-&quot;</span><span class="p">:</span><span class="mf">3.7</span><span class="p">,</span><span class="s2">&quot;B+&quot;</span><span class="p">:</span><span class="mf">3.3</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span><span class="mf">3.0</span><span class="p">,</span> <span class="s2">&quot;B-&quot;</span><span class="p">:</span><span class="mf">2.7</span><span class="p">,</span> <span class="s2">&quot;C+&quot;</span><span class="p">:</span><span class="mf">2.3</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span><span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;C-&quot;</span><span class="p">:</span><span class="mf">1.7</span><span class="p">,</span> <span class="s2">&quot;D+&quot;</span><span class="p">:</span><span class="mf">1.3</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;D-&quot;</span><span class="p">:</span><span class="mf">0.7</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span><span class="mf">0.0</span><span class="p">}</span>
+
+<span class="n">values_to_check</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;professor&quot;</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span>
+<span class="n">curr</span> <span class="o">=</span> <span class="p">[</span><span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;professor&quot;</span><span class="p">],</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">],</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">averages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="c1"># see if the next row in the dataframe is for the current semester</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
+        <span class="c1"># once it is not a match, write the current accumulated information to the dataframe and reset</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="c1"># it is possible for the number of students taking a class to be 0, this would occur when all of the students</span>
+        <span class="c1"># in a class have grades corresponding to W or Other, neither of which have a GPA value</span>
+        <span class="k">if</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;average_gpa&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;num_students&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gpa</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">gpa</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+<span class="c1"># add in the last row</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="n">values_to_check</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;average_gpa&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">average_grades_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;num_students&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+
+<span class="n">average_grades_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>professor</th>
+      <th>course</th>
+      <th>year</th>
+      <th>season</th>
+      <th>average_gpa</th>
+      <th>num_students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>AMST202</td>
+      <td>2016</td>
+      <td>fall</td>
+      <td>2.462500</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Anthony</td>
+      <td>AMST202</td>
+      <td>2017</td>
+      <td>spring</td>
+      <td>2.934783</td>
+      <td>23.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>2017</td>
+      <td>fall</td>
+      <td>2.796429</td>
+      <td>28.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>2018</td>
+      <td>fall</td>
+      <td>3.204651</td>
+      <td>43.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>2018</td>
+      <td>spring</td>
+      <td>2.476190</td>
+      <td>21.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Finally, we can join these two dataframes together, before combining them so that each professor corresponds to one row in the dataframe, storing all of their review and grade information in arrays that can be exploded out in the future. The reason for doing this is in order to more easily match with the data from the Diamondback. Further down the line, we will then reseparate our data out to perform the necessary analysis.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">average_grades_df</span> <span class="o">=</span> <span class="n">average_grades_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;professor&quot;</span> <span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">})</span>
+
+<span class="n">both_averages_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">average_reviews_df</span><span class="p">,</span>
+    <span class="n">average_grades_df</span><span class="p">,</span>
+    <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span><span class="p">,</span>
+    <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;course&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;season&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">both_averages_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>course</th>
+      <th>year</th>
+      <th>season</th>
+      <th>average_rating</th>
+      <th>num_reviews</th>
+      <th>average_gpa</th>
+      <th>num_students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A Anthony</td>
+      <td>AMST203</td>
+      <td>2018</td>
+      <td>summer</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A Kruglanski</td>
+      <td>PSYC489H</td>
+      <td>2015</td>
+      <td>fall</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2019</td>
+      <td>fall</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2019</td>
+      <td>spring</td>
+      <td>1.5</td>
+      <td>2.0</td>
+      <td>2.850877</td>
+      <td>57.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>A Sharma</td>
+      <td>ASTR300</td>
+      <td>2020</td>
+      <td>fall</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span>
+        <span class="s1">&#39;course&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;course&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s1">&#39;semester&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">a</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">],</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">])],</span>
+        <span class="s1">&#39;average_rating&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;average_rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s1">&#39;num_reviews&#39;</span><span class="p">:</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;num_reviews&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s1">&#39;average_gpa&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;average_gpa&#39;</span><span class="p">]],</span>
+        <span class="s1">&#39;num_students&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;num_students&#39;</span><span class="p">])]</span>
+    <span class="p">})</span>
+<span class="n">df_grouped</span> <span class="o">=</span> <span class="n">both_averages_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">combine</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_grouped</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grouped</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span><span class="n">df_grouped</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_grade_data.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/planet_terp_data/PT_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">df_grouped</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>course</th>
+      <th>semester</th>
+      <th>average_rating</th>
+      <th>num_reviews</th>
+      <th>average_gpa</th>
+      <th>num_students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A ANTHONY</td>
+      <td>[AMST203, AMST202, AMST202, AMST203, AMST203, ...</td>
+      <td>[summer 2018, fall 2016, spring 2017, fall 201...</td>
+      <td>[1.0, nan, nan, nan, nan, nan]</td>
+      <td>[1.0, nan, nan, nan, nan, nan]</td>
+      <td>[nan, 2.46, 2.93, 2.8, 3.2, 2.48]</td>
+      <td>[0, 24, 23, 28, 43, 21]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>A KRUGLANSKI</td>
+      <td>[PSYC489H, PSYC489H, PSYC489H, PSYC489T, PSYC4...</td>
+      <td>[fall 2015, spring 2014, spring 2015, spring 2...</td>
+      <td>[2.0, nan, nan, nan, nan, nan, nan, nan, nan, ...</td>
+      <td>[1.0, nan, nan, nan, nan, nan, nan, nan, nan, ...</td>
+      <td>[nan, 3.51, 3.55, 3.89, 3.46, 3.56, 3.52, 3.45...</td>
+      <td>[0, 16, 8, 17, 20, 14, 19, 24, 10, 19, 3, 10, ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>A SHARMA</td>
+      <td>[ASTR300, ASTR300, ASTR300, ASTR300, ASTR300, ...</td>
+      <td>[fall 2019, spring 2019, fall 2020, winter 202...</td>
+      <td>[1.0, 1.5, 2.0, 3.0, nan, nan, nan, nan]</td>
+      <td>[1.0, 2.0, 1.0, 1.0, nan, nan, nan, nan]</td>
+      <td>[nan, 2.85, nan, nan, 2.92, 2.98, 2.69, 3.28]</td>
+      <td>[0, 57, 0, 0, 51, 59, 47, 58]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>A.U. SHANKAR</td>
+      <td>[CMSC216, CMSC216, CMSC216, CMSC216, CMSC216, ...</td>
+      <td>[fall 2017, spring 2018, winter 2018, fall 201...</td>
+      <td>[1.0, 2.0, 1.0, 1.0, 3.0, 2.0, 2.2, 2.66666666...</td>
+      <td>[1.0, 1.0, 1.0, 2.0, 4.0, 2.0, 5.0, 3.0, 2.0, ...</td>
+      <td>[2.62, nan, nan, 1.99, 2.23, 2.7, 2.32, nan, 3...</td>
+      <td>[120, 0, 0, 114, 125, 55, 102, 0, 33, 39, 0, 3...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AARON BARTLETT</td>
+      <td>[ENGL101, ENGL265, ENGL265, ENGL101, ENGL243]</td>
+      <td>[fall 2020, fall 2022, spring 2023, fall 2019,...</td>
+      <td>[1.0, 1.0, 4.0, nan, nan]</td>
+      <td>[1.0, 2.0, 1.0, nan, nan]</td>
+      <td>[nan, 3.3, nan, 2.66, 3.37]</td>
+      <td>[0, 29, 0, 19, 18]</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Duplicates-in-Diamondback">Duplicates in Diamondback<a class="anchor-link" href="#Duplicates-in-Diamondback">&#182;</a></h3><p>One of the issues in our current database of salary data is that the same person could be in there listed under multiple names. For example, David Todd is listed as <em>Todd, David Y</em>, but also as <em>Todd, David Y.</em> and <em>Todd, David Yandell</em>. This would prove an issue if left unchecked, as David Todd would not get properly matched with his PlanetTerp reviews and grade distributions. As such, we need to be able to merge these three people to be classified under the same person.</p>
+<p>The first requirement for someone to be considered the same person is that their name must match. To account for multiple middle names, middle initials, and other potential name setups, we look only at the first word after the comma and the last word before the comma, defining those as a person's first and last name, respectively. As you can see in our previous example, this yields David Todd for all three entries. Additionally, we check that their is no overlap in the years they've taught. In our example, <em>Todd, David Y</em> has only taught in 2015 and 2016. <em>Todd, David Y.</em> then taught from 2017 to 2020, and <em>Todd, David Yandell</em> taught in 2021 and 2022. If there is an overlap, we can say that these entries correspond to different people. No overlap ensures the possibility that this is the same person.</p>
+<p>The final requirement that we check is if there is at least some overlap in the department that they were listed under. In our example, all three of the David Todds were listed under the Arts and Humanities department. Since these three entries meet all three of the requirements that we have laid out, we can say that it is very likely that this is in fact the same person, simply changing what their name is listed as officially. If any entry fails one of the three requirements listed above, we can say that they are different people. If they meet all three, we cannot guarantee that they are the same person, as it is still possible that two people with the same name are in the same department with no overlap in years, but the odds of that are small enough that we can say that any entries that meet all three requirements are likely the same person.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/salary_data/DB_combined_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">combine_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<span class="n">curr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># method to find the intersection of two lists</span>
+<span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temp1</span> <span class="o">=</span> <span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">temp2</span> <span class="o">=</span> <span class="n">l2</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">list1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">))</span>
+    <span class="n">list2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">temp2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list2</span><span class="p">:</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="c1"># check the three conditions</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">and</span> 
+        <span class="n">intersection</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">and</span> 
+        <span class="n">intersection</span><span class="p">(</span><span class="n">curr</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">])</span> <span class="o">!=</span> <span class="p">[]):</span>
+
+        <span class="c1"># combining professors that are detected to be the same</span>
+        <span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">])[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">curr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">2</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">])[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">curr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">3</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span>  <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">])[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Employee&quot;</span><span class="p">])</span>
+
+        <span class="c1"># if we end on a match, add that match to the dataframe</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;real_name(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Employee&quot;</span><span class="p">]]</span>
+            <span class="n">curr</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">]]</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1"># once we detect someone isn&#39;t a match, add the accumulated information to the dataframe</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">combine_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">count</span><span class="p">,</span> <span class="s2">&quot;real_name(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Employee&quot;</span><span class="p">]]</span>
+        <span class="n">curr</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">]]</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">combine_df</span> <span class="o">=</span> <span class="n">combine_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">combine_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>years_taught</th>
+      <th>salaries</th>
+      <th>departments</th>
+      <th>real_name(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>EAMAN KARIM</td>
+      <td>[2018, 2019]</td>
+      <td>[48000.0, 48960.0]</td>
+      <td>['ENGR', 'ENGR']</td>
+      <td>A Karim, Eaman</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>MICHAEL A'HEARN</td>
+      <td>[2013, 2014, 2015, 2016, 2017]</td>
+      <td>[125817.0, 130849.69, 145530.01, 155925.01, 13...</td>
+      <td>['CMNS', 'CMNS', 'CMNS', 'CMNS', 'CMNS']</td>
+      <td>A'Hearn, Michael F.</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MOHAMMED AMIN</td>
+      <td>[2015]</td>
+      <td>[46500.0]</td>
+      <td>['CMNS']</td>
+      <td>AMIN, MOHAMMED NURUL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>WILLIAM AARHUS</td>
+      <td>[2016, 2017, 2018, 2019, 2020, 2021, 2022]</td>
+      <td>[75000.0, 75750.0, 75750.0, 77265.0, 80780.68,...</td>
+      <td>['SVPA', 'SVPA', 'SVPA', 'SVPA', 'SVPA', 'EXST...</td>
+      <td>Aarhus, William H</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>BERHANE ABADI</td>
+      <td>[2022]</td>
+      <td>[31278.0]</td>
+      <td>['VPSA']</td>
+      <td>Abadi, Berhane</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Going back to our favorite English professor David Todd, we can see that all of his information has now been combined together, with all of his various aliases listed under the &quot;real_name(s)&quot; column.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">david_todd</span> <span class="o">=</span> <span class="n">combine_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">combine_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">combine_df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DAVID TODD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]]</span>
+<span class="n">david_todd</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>years_taught</th>
+      <th>salaries</th>
+      <th>departments</th>
+      <th>real_name(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>22125</th>
+      <td>DAVID TODD</td>
+      <td>[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]</td>
+      <td>[8949.58, 29107.38, 30000.0, 33000.0, 33660.0,...</td>
+      <td>['ARHU', 'ARHU', 'ARHU', 'ARHU', 'ARHU', 'ARHU...</td>
+      <td>Todd, David Y | Todd, David Y. | Todd, David Y...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/clean_salary_data.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">combine_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/clean_salary_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Matching-Names">Matching Names<a class="anchor-link" href="#Matching-Names">&#182;</a></h3><p>Now that we have formatted all of our data, the next part we would like to do is join the data from our two sources together. We have already reformatted all of the names from the Diamondback to follow the format used at PlanetTerp. We went from the Diamondback's format of last name, followed by a comma, and finally first name, with potentially a middle name or initial, to PlanetTerp's format of first name followed by last name. From here, we can then join our data on a professor's name.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gpa_review_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;src/1_collect_data/planet_terp_data/PT_combined_data.csv&#39;</span><span class="p">)</span>
+<span class="n">salary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/clean_salary_data.csv&quot;</span><span class="p">)</span>
+
+<span class="n">outer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">gpa_review_df</span><span class="p">,</span>
+    <span class="n">salary_df</span><span class="p">,</span>
+    <span class="n">how</span> <span class="o">=</span> <span class="s2">&quot;outer&quot;</span><span class="p">,</span>
+    <span class="n">on</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+    <span class="n">indicator</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">left_only</span> <span class="o">=</span> <span class="n">outer</span><span class="p">[</span><span class="n">outer</span><span class="p">[</span><span class="s1">&#39;_merge&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;left_only&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LEFT ONLY: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">left_only</span><span class="p">)))</span>
+<span class="n">both</span> <span class="o">=</span> <span class="n">outer</span><span class="p">[</span><span class="n">outer</span><span class="p">[</span><span class="s1">&#39;_merge&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;both&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BOTH: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">both</span><span class="p">)))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>LEFT ONLY: 655
+BOTH: 2490
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Left only corresponds to all of the people that were found only in PlanetTerp and not in the Diamondback, whereas both corresponds to an inner join. From here, we now look for any potential duplicates in our inner join.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">curr_prof</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">dups</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">both</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">curr_prof</span><span class="p">:</span>
+        <span class="n">dups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">curr_prof</span> <span class="o">=</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dups</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>54
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>From here, we now have to manually look through all of our duplicates. Most of the duplicates found were people that just happened to have the same name but were certainly different people, either belonging to different departments, working at the same time, or both. In this case, we would have to cross refrence to see who is actually the one with the correct salary data, and remove the other from the database. There were a few cases in which someone was listed twice as the same person, but our previous method missed it. In this case, we used the following method to manually combine these two entries.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">remove_dups</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">both</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">i2</span><span class="p">:</span>
+        <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;salaries&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;real_name(s)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="s2">&quot;real_name(s)&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; | &quot;</span> <span class="o">+</span> <span class="n">both</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;real_name(s)&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">both</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Finally, there were a few cases in which the information listed in PlanetTerp was wrong. For example, <a href="https://planetterp.com/professor/foster_daniel">Daniel Foster</a> is listed as a professor teaching both Communicates and various Music classes on PlanetTerp. However, there are two Daniel Fosters in our salary data, being Daniel L Foster and Daniel H Foster. A quick <a href="https://identity.umd.edu/search">directory search</a> for &quot;Daniel Foster&quot; confirms this, there are in fact two different Daniel Fosters working at UMD.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<img src="daniel_foster.png" alt="Directory Search for Daniel Foster" />
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Two Daniel Fosters, one teaching Communication and one teaching Music. However, it appears that they are being listed as the same person in PlanetTerp. It is likely because they saw two people named Daniel Foster, both teaching in the Arts and Humanities Department, and simply assumed they were the same person. As such, we manually corrected this, separating the two into their own entries and giving each the data for their resepective classes. Most of the code used in this section is manually reading the dataframe, removing specific indicies and separating things out ourselves, and is not displayed here. To see the full code used in this section, please visit our github <a href="https://github.com/achen132/achen132.github.io/blob/main/src/2_clean_data/join.ipynb">here</a>.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Missing-Professors">Missing Professors<a class="anchor-link" href="#Missing-Professors">&#182;</a></h3><p>Going back to our previous joins, we can see that there were 2490 professors who appeared in both PlanetTerp and the Diamondback databases and 655 who only appeared in PlanetTerp. As such, for each of these 655 people, we then went through all of the professors listed in the Diamondback database to try and see if we could find someone who did not get properly matched. To do this, we flagged a potential candidate in the Diamondback data as someone whose name contained the first and last name listed in PlanetTerp and was listed under a department that included the classes that they taught on PlanetTerp. To perform this task, we first needed to get a comprehensive list of every subject and what department they would be listed under.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;src/2_clean_data/combined_data.csv&#39;</span><span class="p">)</span>
+
+<span class="c1">#Columns with lists are represented as strings, so this is converting them into list/np.array types</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;salaries&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;salaries&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;semester&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;semester&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;years_taught&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;years_taught&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;course&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;course&#39;</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_rating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_rating&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_reviews&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_reviews&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_gpa&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_gpa&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_students&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_students&#39;</span><span class="p">])</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">([</span><span class="s1">&#39;course&#39;</span><span class="p">,</span> <span class="s1">&#39;semester&#39;</span><span class="p">,</span> <span class="s1">&#39;average_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;num_reviews&#39;</span><span class="p">,</span> <span class="s1">&#39;average_gpa&#39;</span><span class="p">,</span> <span class="s1">&#39;num_students&#39;</span><span class="p">])</span>
+
+<span class="c1"># uniqueCourses = df[&#39;course&#39;].str[0:4].unique()</span>
+
+<span class="c1"># print(df[&#39;course&#39;].str[0:4].unique())</span>
+<span class="c1"># print(len(df[&#39;course&#39;].str[0:4].unique()))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[50], line 15</span>
+<span class="ansi-green-fg">     12</span>     df.iloc[index][&#39;average_gpa&#39;] = np.fromstring(df.iloc[index][&#39;average_gpa&#39;].strip(&#34;[]&#34;), sep=&#39;,&#39;)
+<span class="ansi-green-fg">     13</span>     df.iloc[index][&#39;num_students&#39;] = ast.literal_eval(df.iloc[index][&#39;num_students&#39;])
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 15</span> df = df.explode([&#39;course&#39;, &#39;semester&#39;, &#39;average_rating&#39;, &#39;num_reviews&#39;, &#39;average_gpa&#39;, &#39;num_students&#39;])
+<span class="ansi-green-fg">     17</span> # uniqueCourses = df[&#39;course&#39;].str[0:4].unique()
+<span class="ansi-green-fg">     18</span> 
+<span class="ansi-green-fg">     19</span> # print(df[&#39;course&#39;].str[0:4].unique())
+<span class="ansi-green-fg">     20</span> # print(len(df[&#39;course&#39;].str[0:4].unique()))
+
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\explo\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py:9038</span>, in <span class="ansi-cyan-fg">DataFrame.explode</span><span class="ansi-blue-intense-fg ansi-bold">(self, column, ignore_index)</span>
+<span class="ansi-green-fg">   9036</span>     for c in columns[1:]:
+<span class="ansi-green-fg">   9037</span>         if not all(counts0 == self[c].apply(mylen)):
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 9038</span>             raise ValueError(&#34;columns must have matching element counts&#34;)
+<span class="ansi-green-fg">   9039</span>     result = DataFrame({c: df[c].explode() for c in columns})
+<span class="ansi-green-fg">   9040</span> result = df.drop(columns, axis=1).join(result)
+
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: columns must have matching element counts</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
