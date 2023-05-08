@@ -14609,7 +14609,35 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><p>Faculty are the lifeblood of any university. They conduct cutting-edge research to discover new insights that push the boundary of the field they are studying. They also teach classes, helping students learn new skills and knowledge that will benefit them in their professional lives. As in any occupation, professors vary in the quality of their research and their teaching ability, which directly impacts the quality of education that students who take their classes receive.</p>
+<h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#data-collection">Data Collection</a><ul>
+<li><a href="#imports">Imports</a></li>
+<li><a href="#planetterp">PlanetTerp</a></li>
+<li><a href="#diamondback">Diamondback</a></li>
+<li><a href="#combining-planetterp-data">Combining PlanetTerp Data</a></li>
+</ul>
+</li>
+<li><a href="#data-cleaning">Data Cleaning</a><ul>
+<li><a href="#duplicates-in-diamondback">Duplicates in Diamondback</a></li>
+<li><a href="#matching-names">Matching Names</a></li>
+<li><a href="#getting-departments">Getting Departments</a></li>
+<li><a href="#missing-professors">Missing Professors</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Introduction-">Introduction <a class="anchor" id="introduction" /><a class="anchor-link" href="#Introduction-">&#182;</a></h1><p>Faculty are the lifeblood of any university. They conduct cutting-edge research to discover new insights that push the boundary of the field they are studying. They also teach classes, helping students learn new skills and knowledge that will benefit them in their professional lives. As in any occupation, professors vary in the quality of their research and their teaching ability, which directly impacts the quality of education that students who take their classes receive.</p>
 <p>Students understand the fact that their choice of professor for a course can be the difference between an engaging, informative semester or a less than pleasing experience. Prior to registration, students often check professor reviews, online posts regarding the class, grade distributions, and other sources of information to determine whose class to choose.</p>
 <p>The goal of this project is to see the connection between how effective a professor is and possible determining factors of their teaching ability. Using data science, we will review salary data, years of experience, and average student rating of professors here at the University of Maryland to see how they correlate with their average Grade Point Average (GPA) for students across their classes. For example, does a professor with a high salary and many years of experience at UMD reflect in higher student GPAs? Once we build a correlative model, we can also pose performative questions in reverse, like whether the University is getting the best 'bang-for-their-buck' given a professor's salary and their average GPA as compared to other professors in the same field.</p>
 
@@ -14623,7 +14651,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Data-Collection">Data Collection<a class="anchor-link" href="#Data-Collection">&#182;</a></h1>
+<h1 id="Data-Collection-">Data Collection <a class="anchor" id="data-collection" /><a class="anchor-link" href="#Data-Collection-">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -14634,7 +14662,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Imports">Imports<a class="anchor-link" href="#Imports">&#182;</a></h3>
+<h3 id="Imports-">Imports <a class="anchor" id="imports" /><a class="anchor-link" href="#Imports-">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14669,6 +14697,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">from</span> <span class="nn">ggplot</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 </pre></div>
 
      </div>
@@ -14683,7 +14713,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="PlanetTerp">PlanetTerp<a class="anchor-link" href="#PlanetTerp">&#182;</a></h3><p>Since we are looking for information on a professor's grade distributions and student-made reviews of that professor, <a href="https://planetterp.com/">PlanetTerp</a> was a natural place to look for the information we needed. The data there is specific to UMD and the website itself was made by students, who were generous enough to provide us a <a href="https://planetterp.com/api/">documented API</a> that we could use. We used GET requests to the PlanetTerp API in order to get the information from the website, before storing it into dataframes. However, we quickly discovered that performing all of these requests could take excessive amounts of time. As such, we decided to store our data into csv files and then read from those files locally rather than constantly re-requesting the website. We did this by checking if our csv files already existed, and if they did we could simply read from those files, only requesting from the site if the csv files we were looking for didn't exist. As such, all of the data used from here on out in this tutorial will be accurate up until April 28th, 2023, as that is the last time we actually requested information from PlanetTerp itself.</p>
+<h3 id="PlanetTerp-">PlanetTerp <a class="anchor" id="planetterp" /><a class="anchor-link" href="#PlanetTerp-">&#182;</a></h3><p>Since we are looking for information on a professor's grade distributions and student-made reviews of that professor, <a href="https://planetterp.com/">PlanetTerp</a> was a natural place to look for the information we needed. The data there is specific to UMD and the website itself was made by students, who were generous enough to provide us a <a href="https://planetterp.com/api/">documented API</a> that we could use. We used GET requests to the PlanetTerp API in order to get the information from the website, before storing it into dataframes. However, we quickly discovered that performing all of these requests could take excessive amounts of time. As such, we decided to store our data into csv files and then read from those files locally rather than constantly re-requesting the website. We did this by checking if our csv files already existed, and if they did we could simply read from those files, only requesting from the site if the csv files we were looking for didn't exist. As such, all of the data used from here on out in this tutorial will be accurate up until April 28th, 2023, as that is the last time we actually requested information from PlanetTerp itself.</p>
 
 </div>
 </div>
@@ -14811,7 +14841,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Diamondback">Diamondback<a class="anchor-link" href="#Diamondback">&#182;</a></h3><p>The other information that we need is a way to find out how much a teacher is earning, as well as a general estimate for how long they've been teaching at the University of Maryland. <a href="https://dbknews.com/">The Diamondback</a> publishes a yearly <a href="https://salaryguide.dbknews.com/">salary guide</a>, which has its own <a href="https://api.dbknews.com/docs/#/salary">API</a>. From here, we were then able to perform the same process, using GET requests to read the salary data for each year from 2013 to 2022. This information not only tells us how much a certain professor got paid each year, but also allows us to deduct how long a professor has been working at UMD based on how many years they were getting paid. We also performed the same procedure of writing our data to csv files to read from locally, as all of these requests also took very long to perform. As such, like with PlanetTerp, the data used from here on out is accurate up until April 28th, 2023.</p>
+<h3 id="Diamondback-">Diamondback <a class="anchor" id="diamondback" /><a class="anchor-link" href="#Diamondback-">&#182;</a></h3><p>The other information that we need is a way to find out how much a teacher is earning, as well as a general estimate for how long they've been teaching at the University of Maryland. <a href="https://dbknews.com/">The Diamondback</a> publishes a yearly <a href="https://salaryguide.dbknews.com/">salary guide</a>, which has its own <a href="https://api.dbknews.com/docs/#/salary">API</a>. From here, we were then able to perform the same process, using GET requests to read the salary data for each year from 2013 to 2022. This information not only tells us how much a certain professor got paid each year, but also allows us to deduct how long a professor has been working at UMD based on how many years they were getting paid. We also performed the same procedure of writing our data to csv files to read from locally, as all of these requests also took very long to perform. As such, like with PlanetTerp, the data used from here on out is accurate up until April 28th, 2023.</p>
 
 </div>
 </div>
@@ -15353,7 +15383,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Combining-PlanetTerp-Data">Combining PlanetTerp Data<a class="anchor-link" href="#Combining-PlanetTerp-Data">&#182;</a></h3><p>Eventually, we would like to have all of our data come together into one single dataframe for us to manipulate. Since student reviews and grades are currently being stored in separate dataframes, the first step towards our end goal is logically to combine these two dataframes into one, as they both come from the same data source. We would like to separate all of the data we currently have, grouping them by a specific course taught by a specific professor in a specific semester. The grade data from PlanetTerp is stored in this format, with each professor's classes being separated out into every semester they taught the class. However, the reviews left on the website don't have the semester that the student took the class in listed. As such, we have to make assumptions for what semester a student took the class they are reviewing based on the date that they left their review. We assume any review left from September to December are for fall classes, January are for winter classes, February to May are for spring classes, and June to August are for summer classes.</p>
+<h3 id="Combining-PlanetTerp-Data-">Combining PlanetTerp Data <a class="anchor" id="combining-planetterp-data" /><a class="anchor-link" href="#Combining-PlanetTerp-Data-">&#182;</a></h3><p>Eventually, we would like to have all of our data come together into one single dataframe for us to manipulate. Since student reviews and grades are currently being stored in separate dataframes, the first step towards our end goal is logically to combine these two dataframes into one, as they both come from the same data source. We would like to separate all of the data we currently have, grouping them by a specific course taught by a specific professor in a specific semester. The grade data from PlanetTerp is stored in this format, with each professor's classes being separated out into every semester they taught the class. However, the reviews left on the website don't have the semester that the student took the class in listed. As such, we have to make assumptions for what semester a student took the class they are reviewing based on the date that they left their review. We assume any review left from September to December are for fall classes, January are for winter classes, February to May are for spring classes, and June to August are for summer classes.</p>
 
 </div>
 </div>
@@ -16128,7 +16158,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">&#182;</a></h1>
+<h1 id="Data-Cleaning-">Data Cleaning <a class="anchor" id="data-cleaning" /><a class="anchor-link" href="#Data-Cleaning-">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -16139,7 +16169,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Duplicates-in-Diamondback">Duplicates in Diamondback<a class="anchor-link" href="#Duplicates-in-Diamondback">&#182;</a></h3><p>One of the issues in our current database of salary data is that the same person could be in there listed under multiple names. For example, David Todd is listed as <em>Todd, David Y</em>, but also as <em>Todd, David Y.</em> and <em>Todd, David Yandell</em>. This would prove an issue if left unchecked, as David Todd would not get properly matched with his PlanetTerp reviews and grade distributions. As such, we need to be able to merge these three people to be classified under the same person.</p>
+<h3 id="Duplicates-in-Diamondback-">Duplicates in Diamondback <a class="anchor" id="duplicates-in-diamondback" /><a class="anchor-link" href="#Duplicates-in-Diamondback-">&#182;</a></h3><p>One of the issues in our current database of salary data is that the same person could be in there listed under multiple names. For example, David Todd is listed as <em>Todd, David Y</em>, but also as <em>Todd, David Y.</em> and <em>Todd, David Yandell</em>. This would prove an issue if left unchecked, as David Todd would not get properly matched with his PlanetTerp reviews and grade distributions. As such, we need to be able to merge these three people to be classified under the same person.</p>
 <p>The first requirement for someone to be considered the same person is that their name must match. To account for multiple middle names, middle initials, and other potential name setups, we look only at the first word after the comma and the last word before the comma, defining those as a person's first and last name, respectively. As you can see in our previous example, this yields David Todd for all three entries. Additionally, we check that their is no overlap in the years they've taught. In our example, <em>Todd, David Y</em> has only taught in 2015 and 2016. <em>Todd, David Y.</em> then taught from 2017 to 2020, and <em>Todd, David Yandell</em> taught in 2021 and 2022. If there is an overlap, we can say that these entries correspond to different people. No overlap ensures the possibility that this is the same person.</p>
 <p>The final requirement that we check is if there is at least some overlap in the department that they were listed under. In our example, all three of the David Todds were listed under the Arts and Humanities department. Since these three entries meet all three of the requirements that we have laid out, we can say that it is very likely that this is in fact the same person, simply changing what their name is listed as officially. If any entry fails one of the three requirements listed above, we can say that they are different people. If they meet all three, we cannot guarantee that they are the same person, as it is still possible that two people with the same name are in the same department with no overlap in years, but the odds of that are small enough that we can say that any entries that meet all three requirements are likely the same person.</p>
 
@@ -16420,7 +16450,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Matching-Names">Matching Names<a class="anchor-link" href="#Matching-Names">&#182;</a></h3><p>Now that we have formatted all of our data, the next part we would like to do is join the data from our two sources together. We have already reformatted all of the names from the Diamondback to follow the format used at PlanetTerp. We went from the Diamondback's format of last name, followed by a comma, and finally first name, with potentially a middle name or initial, to PlanetTerp's format of first name followed by last name. From here, we can then join our data on a professor's name.</p>
+<h3 id="Matching-Names-">Matching Names <a class="anchor" id="matching-names" /><a class="anchor-link" href="#Matching-Names-">&#182;</a></h3><p>Now that we have formatted all of our data, the next part we would like to do is join the data from our two sources together. We have already reformatted all of the names from the Diamondback to follow the format used at PlanetTerp. We went from the Diamondback's format of last name, followed by a comma, and finally first name, with potentially a middle name or initial, to PlanetTerp's format of first name followed by last name. From here, we can then join our data on a professor's name.</p>
 
 </div>
 </div>
@@ -16611,7 +16641,7 @@ BOTH: 2490
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Missing-Professors">Missing Professors<a class="anchor-link" href="#Missing-Professors">&#182;</a></h3><p>Going back to our previous joins, we can see that there were 2490 professors who appeared in both PlanetTerp and the Diamondback databases and 655 who only appeared in PlanetTerp. As such, for each of these 655 people, we then went through all of the professors listed in the Diamondback database to try and see if we could find someone who did not get properly matched. To do this, we flagged a potential candidate in the Diamondback data as someone whose name contained the first and last name listed in PlanetTerp and was listed under a department that included the classes that they taught on PlanetTerp. To perform this task, we first needed to get a comprehensive list of every subject and what department they would be listed under.</p>
+<h3 id="Getting-Departments-">Getting Departments <a class="anchor" id="getting-departments" /><a class="anchor-link" href="#Getting-Departments-">&#182;</a></h3><p>Going back to our previous joins, we can see that there were 2490 professors who appeared in both PlanetTerp and the Diamondback databases and 655 who only appeared in PlanetTerp. As such, for each of these 655 people, we then went through all of the professors listed in the Diamondback database to try and see if we could find someone who did not get properly matched. To do this, we flagged a potential candidate in the Diamondback data as someone whose name contained the first and last name listed in PlanetTerp and was listed under a department that included the classes that they taught on PlanetTerp. To perform this task, we first needed to get a comprehensive list of every subject and what department they would be listed under.</p>
 
 </div>
 </div>
@@ -16638,12 +16668,12 @@ BOTH: 2490
     <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_gpa&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;average_gpa&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_students&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;num_students&#39;</span><span class="p">])</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">([</span><span class="s1">&#39;course&#39;</span><span class="p">,</span> <span class="s1">&#39;semester&#39;</span><span class="p">,</span> <span class="s1">&#39;average_rating&#39;</span><span class="p">,</span> <span class="s1">&#39;num_reviews&#39;</span><span class="p">,</span> <span class="s1">&#39;average_gpa&#39;</span><span class="p">,</span> <span class="s1">&#39;num_students&#39;</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">explode</span><span class="p">([</span><span class="s1">&#39;course&#39;</span><span class="p">])</span>
 
-<span class="c1"># uniqueCourses = df[&#39;course&#39;].str[0:4].unique()</span>
+<span class="n">uniqueCourses</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;course&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 
-<span class="c1"># print(df[&#39;course&#39;].str[0:4].unique())</span>
-<span class="c1"># print(len(df[&#39;course&#39;].str[0:4].unique()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;course&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;course&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
 </pre></div>
 
      </div>
@@ -16662,27 +16692,28 @@ BOTH: 2490
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
-Cell <span class="ansi-green-intense-fg ansi-bold">In[50], line 15</span>
-<span class="ansi-green-fg">     12</span>     df.iloc[index][&#39;average_gpa&#39;] = np.fromstring(df.iloc[index][&#39;average_gpa&#39;].strip(&#34;[]&#34;), sep=&#39;,&#39;)
-<span class="ansi-green-fg">     13</span>     df.iloc[index][&#39;num_students&#39;] = ast.literal_eval(df.iloc[index][&#39;num_students&#39;])
-<span class="ansi-green-intense-fg ansi-bold">---&gt; 15</span> df = df.explode([&#39;course&#39;, &#39;semester&#39;, &#39;average_rating&#39;, &#39;num_reviews&#39;, &#39;average_gpa&#39;, &#39;num_students&#39;])
-<span class="ansi-green-fg">     17</span> # uniqueCourses = df[&#39;course&#39;].str[0:4].unique()
-<span class="ansi-green-fg">     18</span> 
-<span class="ansi-green-fg">     19</span> # print(df[&#39;course&#39;].str[0:4].unique())
-<span class="ansi-green-fg">     20</span> # print(len(df[&#39;course&#39;].str[0:4].unique()))
-
-File <span class="ansi-green-intense-fg ansi-bold">c:\Users\explo\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py:9038</span>, in <span class="ansi-cyan-fg">DataFrame.explode</span><span class="ansi-blue-intense-fg ansi-bold">(self, column, ignore_index)</span>
-<span class="ansi-green-fg">   9036</span>     for c in columns[1:]:
-<span class="ansi-green-fg">   9037</span>         if not all(counts0 == self[c].apply(mylen)):
-<span class="ansi-green-intense-fg ansi-bold">-&gt; 9038</span>             raise ValueError(&#34;columns must have matching element counts&#34;)
-<span class="ansi-green-fg">   9039</span>     result = DataFrame({c: df[c].explode() for c in columns})
-<span class="ansi-green-fg">   9040</span> result = df.drop(columns, axis=1).join(result)
-
-<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: columns must have matching element counts</pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[&#39;PSYC&#39; &#39;ASTR&#39; &#39;CMSC&#39; &#39;ECON&#39; &#39;HESI&#39; &#39;EDHI&#39; &#39;COMM&#39; &#39;INST&#39; &#39;ENAE&#39; &#39;ENME&#39;
+ &#39;ENMA&#39; &#39;ENRE&#39; &#39;ARTH&#39; &#39;PHYS&#39; &#39;STAT&#39; &#39;ENGL&#39; &#39;PHSC&#39; &#39;ANTH&#39; &#39;BIOE&#39; &#39;GEMS&#39;
+ &#39;MATH&#39; &#39;BMGT&#39; &#39;BULM&#39; &#39;CMLT&#39; &#39;GERM&#39; &#39;JWST&#39; &#39;ISRL&#39; &#39;BUSO&#39; &#39;DANC&#39; &#39;ARHU&#39;
+ &#39;TDPS&#39; &#39;UNIV&#39; &#39;ENEE&#39; &#39;PERS&#39; &#39;ARAB&#39; &#39;ENCE&#39; &#39;HIST&#39; &#39;HACS&#39; &#39;CCJS&#39; &#39;GEOL&#39;
+ &#39;FIRE&#39; &#39;SOCY&#39; &#39;CPSD&#39; &#39;CPSP&#39; &#39;PLCY&#39; &#39;AASP&#39; &#39;HNUH&#39; &#39;WMST&#39; &#39;BUFN&#39; &#39;BUSI&#39;
+ &#39;ENTS&#39; &#39;MSML&#39; &#39;HONR&#39; &#39;PUAF&#39; &#39;JOUR&#39; &#39;PHIL&#39; &#39;LING&#39; &#39;BSCI&#39; &#39;BIOL&#39; &#39;AOSC&#39;
+ &#39;HDCC&#39; &#39;LGBT&#39; &#39;EDHD&#39; &#39;EDUC&#39; &#39;TLTC&#39; &#39;EDMS&#39; &#39;CHEM&#39; &#39;CPMS&#39; &#39;ENES&#39; &#39;HESP&#39;
+ &#39;HEBR&#39; &#39;GEOG&#39; &#39;LARC&#39; &#39;EDCP&#39; &#39;IDEA&#39; &#39;FMSC&#39; &#39;NEUR&#39; &#39;MIEH&#39; &#39;BUMK&#39; &#39;ENST&#39;
+ &#39;ANSC&#39; &#39;INAG&#39; &#39;CHBE&#39; &#39;ENCH&#39; &#39;SPAN&#39; &#39;PORT&#39; &#39;USLT&#39; &#39;SLLC&#39; &#39;ENTM&#39; &#39;BUSM&#39;
+ &#39;FREN&#39; &#39;AMST&#39; &#39;KNES&#39; &#39;MLSC&#39; &#39;THET&#39; &#39;CHIN&#39; &#39;EALL&#39; &#39;BUMO&#39; &#39;EDCI&#39; &#39;TLPL&#39;
+ &#39;ENPM&#39; &#39;AREC&#39; &#39;BISI&#39; &#39;CBMG&#39; &#39;ENSP&#39; &#39;GVPT&#39; &#39;PHPE&#39; &#39;ENNU&#39; &#39;HLSA&#39; &#39;HLTH&#39;
+ &#39;BSOS&#39; &#39;SPHL&#39; &#39;BUDT&#39; &#39;CHSE&#39; &#39;HHUM&#39; &#39;CPSF&#39; &#39;LBSC&#39; &#39;AAST&#39; &#39;BCHM&#39; &#39;EPIB&#39;
+ &#39;ARTT&#39; &#39;BUAC&#39; &#39;HLSC&#39; &#39;CLFS&#39; &#39;SMLP&#39; &#39;HLMN&#39; &#39;MLAW&#39; &#39;SURV&#39; &#39;AGNR&#39; &#39;PLSC&#39;
+ &#39;EDPS&#39; &#39;EDSP&#39; &#39;ENFP&#39; &#39;INFM&#39; &#39;UMEI&#39; &#39;BEES&#39; &#39;AMSC&#39; &#39;EMBA&#39; &#39;CLAS&#39; &#39;LATN&#39;
+ &#39;IMMR&#39; &#39;BIOM&#39; &#39;URSP&#39; &#39;CHPH&#39; &#39;CPBE&#39; &#39;NACS&#39; &#39;MUSC&#39; &#39;MUED&#39; &#39;IMDM&#39; &#39;CINE&#39;
+ &#39;FILM&#39; &#39;NFSC&#39; &#39;ENSE&#39; &#39;CPSS&#39; &#39;AGST&#39; &#39;DATA&#39; &#39;RUSS&#39; &#39;ARCH&#39; &#39;CPGH&#39; &#39;RELS&#39;
+ &#39;BSST&#39; &#39;WGSS&#39; &#39;CPJT&#39; &#39;JAPN&#39; &#39;ITAL&#39; &#39;MUET&#39; &#39;LACS&#39; &#39;GREK&#39; &#39;LASC&#39; &#39;BSGC&#39;
+ &#39;CPSA&#39; &#39;RDEV&#39; &#39;BSCV&#39; &#39;CPSN&#39; &#39;HGLO&#39; &#39;HEIP&#39; &#39;BIPH&#39; &#39;PEER&#39; &#39;ENEB&#39; &#39;BMSO&#39;
+ &#39;CPSG&#39; &#39;HBUS&#39; &#39;CONS&#39; &#39;CPPL&#39; &#39;ENBC&#39; &#39;SLAA&#39; &#39;CPET&#39; &#39;VMSC&#39; &#39;KORA&#39; &#39;MEES&#39;]
+190
+</pre>
 </div>
 </div>
 
@@ -16690,6 +16721,590 @@ File <span class="ansi-green-intense-fg ansi-bold">c:\Users\explo\AppData\Local\
 
 </div>
 
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>From here, we need to start matching classes to what department they are listed under.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Get full names for each department</span>
+
+<span class="n">code_fullname_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">undergrad_majors</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://academiccatalog.umd.edu/undergraduate/approved-courses/&quot;</span><span class="p">)</span>
+<span class="n">undergrad_majors_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">undergrad_majors</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">major</span> <span class="ow">in</span> <span class="n">undergrad_majors_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;/undergraduate/approved-courses/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">):</span>
+    <span class="n">majorInfo</span> <span class="o">=</span> <span class="n">major</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\u200b</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; - &#39;</span><span class="p">)</span>
+    <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">majorInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">majorInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    
+<span class="n">grad_majors</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://academiccatalog.umd.edu/graduate/courses/&quot;</span><span class="p">)</span>
+<span class="n">grad_majors_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">grad_majors</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">major</span> <span class="ow">in</span> <span class="n">grad_majors_soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;/graduate/courses/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">):</span>
+    <span class="n">majorInfo</span> <span class="o">=</span> <span class="n">major</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\u200b</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; - &#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">majorInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">:</span>
+        <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">majorInfo</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">majorInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Manually add full names for codes that don&#39;t have full names yet</span>
+
+<span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">uniqueCourses</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">code</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+<span class="n">code_fullname_dict</span><span class="p">[</span><span class="s1">&#39;BUSO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Online MBA Program&#39;</span>
+<span class="n">code_fullname_dict</span><span class="p">[</span><span class="s1">&#39;BMSO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Online MS in Business Analytics&#39;</span>
+<span class="n">code_fullname_dict</span><span class="p">[</span><span class="s1">&#39;HBUS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Interdisciplinary Business Honors&quot;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>BUSO
+BMSO
+HBUS
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#get colleges for some grad school majors</span>
+
+<span class="n">final_code_to_school</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">gradMajorsSchools</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://gradschool.umd.edu/admissions/programs-a-to-z&quot;</span><span class="p">)</span>
+<span class="n">gradMajorsSchools_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">gradMajorsSchools</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">gradMajorsSchools_soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;strong&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Get majors under each school</span>
+
+<span class="n">majors_schools</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">schools</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://academiccatalog.umd.edu/undergraduate/colleges-schools/&quot;</span><span class="p">)</span>
+<span class="n">schools_soup</span> <span class="o">=</span>  <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">schools</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+<span class="n">links_to_schools</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">schools</span> <span class="ow">in</span> <span class="n">schools_soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;/undergraduate/colleges-schools/&quot;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">majors</span> <span class="ow">in</span> <span class="n">schools</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">majors</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">links_to_schools</span><span class="p">[</span><span class="n">majors</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">school</span> <span class="ow">in</span> <span class="n">links_to_schools</span><span class="p">:</span>
+    <span class="n">majors</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://academiccatalog.umd.edu&quot;</span> <span class="o">+</span> <span class="n">links_to_schools</span><span class="p">[</span><span class="n">school</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;#degreeprogramstext&quot;</span><span class="p">)</span>
+    <span class="n">majors_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">majors</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">majors_soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;degreeprogramstextcontainer&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span> <span class="c1">#Journalism school and office of undergraduate studies</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">majors_soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;programstextcontainer&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">program</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;ul&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">majors_schools</span><span class="p">[</span><span class="n">program</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">school</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">majors_soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s1">&#39;degreeprogramstextcontainer&#39;</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">program</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="p">):</span>
+                <span class="n">majors_schools</span><span class="p">[</span><span class="n">program</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="n">school</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Rename long college names to short version</span>
+
+<span class="k">def</span> <span class="nf">rename_colleges</span><span class="p">(</span><span class="n">dictionary</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s1">&#39;business&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;BMGT&#39;</span> <span class="c1">#&#39;Robert H. Smith School of Business&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;engineering&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ENGR&#39;</span> <span class="c1">#&#39;A. James Clark School of Engineering&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;information studies&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span> <span class="c1">#&#39;College of Information Studies&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;computer&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;CMNS&#39;</span> <span class="c1">#&#39;College of Computer, Mathematical, and Natural Sciences&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;arts&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ARHU&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;behavioral&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;BSOS&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;education&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;EDUC&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;architecture&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ARCH&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;health&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;SPHL&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;agric&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;AGNR&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;journalism&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;JOUR&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;inter&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="n">code</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Office of Undergraduate Studies&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rename_colleges</span><span class="p">(</span><span class="n">final_code_to_school</span><span class="p">)</span>
+<span class="n">rename_colleges</span><span class="p">(</span><span class="n">majors_schools</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">find_matching_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">string_list</span><span class="p">):</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">string_list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matches</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#biolog - CMNS</span>
+<span class="c1">#engineer - A James Clark</span>
+<span class="c1">#ed - College of Education</span>
+<span class="c1">#college park scholars/gemstone/honors - Office of Undergraduate Studies</span>
+<span class="c1">#business/MBA - RH Smith</span>
+<span class="c1">#health - School of Public Health</span>
+<span class="c1">#agri - College of Agriculture and Natural Resources</span>
+<span class="c1">#arts - College of Arts and Humanities</span>
+<span class="c1">#lang/Persian/Russian/Spanish/French/Latin/Portuguese/Korean/Germanic Studies/</span>
+<span class="c1">#Italian/Hebrew/Greek/america- College of Arts and Humanities</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniqueCourses</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_code_to_school</span><span class="p">:</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">find_matching_string</span><span class="p">(</span><span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">majors_schools</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">majors_schools</span><span class="p">[</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#now will need to match keywords of major name to school</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;biolog&#39;</span><span class="p">,</span> <span class="s1">&#39;systematics&#39;</span><span class="p">,</span> <span class="s1">&#39;biom&#39;</span><span class="p">,</span> <span class="s1">&#39;machine&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;CMNS&#39;</span>
+            <span class="k">elif</span> <span class="s1">&#39;engineer&#39;</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ENGR&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ed&#39;</span><span class="p">,</span> <span class="s1">&#39;teach&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;EDUC&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;college park scholars&#39;</span><span class="p">,</span> <span class="s1">&#39;gemstone&#39;</span><span class="p">,</span> <span class="s1">&#39;honors&#39;</span><span class="p">,</span> <span class="s1">&#39;first-year&#39;</span><span class="p">,</span> <span class="s1">&#39;aces&#39;</span><span class="p">,</span> <span class="s1">&#39;civicus&#39;</span><span class="p">,</span> <span class="s1">&#39;design cultures&#39;</span><span class="p">,</span> <span class="s1">&#39;university&#39;</span><span class="p">,</span> <span class="s1">&#39;global&#39;</span><span class="p">,</span> <span class="s1">&#39;maryland&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Office of Undergraduate Studies&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;business&#39;</span><span class="p">,</span> <span class="s1">&#39;mba&#39;</span><span class="p">,</span> <span class="s1">&#39;accounting&#39;</span><span class="p">,</span> <span class="s1">&#39;entrepreneur&#39;</span><span class="p">,</span> <span class="s1">&#39;manage&#39;</span><span class="p">,</span> <span class="s1">&#39;decision&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;BMGT&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;theatre&#39;</span><span class="p">,</span> <span class="s1">&#39;film&#39;</span><span class="p">,</span><span class="s1">&#39;lang&#39;</span><span class="p">,</span><span class="s1">&#39;latin&#39;</span><span class="p">,</span> <span class="s1">&#39;germanic&#39;</span><span class="p">,</span> <span class="s1">&#39;immigration&#39;</span><span class="p">,</span> <span class="s1">&#39;art&#39;</span><span class="p">,</span> <span class="s1">&#39;gay&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ARHU&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;health&#39;</span><span class="p">,</span> <span class="s1">&#39;epid&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;SPHL&#39;</span>
+            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;behavior&#39;</span><span class="p">,</span> <span class="s1">&#39;law&#39;</span><span class="p">]):</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;BSOS&#39;</span>
+            <span class="k">elif</span> <span class="s1">&#39;information&#39;</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+            <span class="k">elif</span> <span class="s1">&#39;urban&#39;</span> <span class="ow">in</span> <span class="n">code_fullname_dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="c1">#architecture</span>
+                <span class="n">final_code_to_school</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ARCH&#39;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">uniqueCourses</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">final_code_to_school</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_code_dept</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">final_code_to_school</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="s1">&#39;Major&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;Department&#39;</span><span class="p">})</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_code_dept</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[&nbsp;]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Major</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>BMAC</td>
+      <td>BMGT</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PMAM</td>
+      <td>ENGR</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Z115</td>
+      <td>ENGR</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ENAE</td>
+      <td>ENGR</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PMAE</td>
+      <td>ENGR</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>417</th>
+      <td>CPPL</td>
+      <td>Office of Undergraduate Studies</td>
+    </tr>
+    <tr>
+      <th>418</th>
+      <td>ENBC</td>
+      <td>ENGR</td>
+    </tr>
+    <tr>
+      <th>419</th>
+      <td>SLAA</td>
+      <td>ARHU</td>
+    </tr>
+    <tr>
+      <th>420</th>
+      <td>CPET</td>
+      <td>Office of Undergraduate Studies</td>
+    </tr>
+    <tr>
+      <th>421</th>
+      <td>KORA</td>
+      <td>ARHU</td>
+    </tr>
+  </tbody>
+</table>
+<p>422 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Missing-Professors-">Missing Professors <a class="anchor" id="missing-professors" /><a class="anchor-link" href="#Missing-Professors-">&#182;</a></h3><p>Now that we have a dataframe that can store what each department each class is listed under, we can look for potnetial missed matches. We use the following method to generate a dataframe of potential matches using the criteria defined above, where a person is a potential match if the PlanetTerp first or last name is somewhere within the Diamondback name and they are listed in the Diamondback as working in the department that the classes they taught on PlanetTerp are under.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">majors_df</span> <span class="o">=</span> <span class="n">df_code_dept</span>
+
+<span class="k">def</span> <span class="nf">find_similar</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">courses</span><span class="p">,</span> <span class="n">outer</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># find the department that the major is listed under</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">course</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">courses</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">)):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">majors_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">majors_df</span><span class="p">[</span><span class="s1">&#39;Major&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">course</span><span class="p">[:</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="n">majors_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Department&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">temp</span> <span class="o">==</span> <span class="s1">&#39;Public Policy&#39;</span><span class="p">:</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;PLCY&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="c1"># separates out hyphenated last names</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">last</span><span class="p">:</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># looks for professors that match our criteria</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">outer</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">outer</span><span class="p">[</span><span class="s2">&quot;_merge&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;left_only&quot;</span><span class="p">)</span> <span class="o">&amp;</span> 
+                   <span class="p">((</span><span class="n">outer</span><span class="p">[</span><span class="s2">&quot;first_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">names</span><span class="p">))</span> <span class="o">|</span>
+                    <span class="p">(</span><span class="n">outer</span><span class="p">[</span><span class="s2">&quot;last_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">names</span><span class="p">))</span>
+                    <span class="p">)][[</span><span class="s2">&quot;real_name(s)&quot;</span><span class="p">,</span> <span class="s2">&quot;years_taught&quot;</span><span class="p">,</span> <span class="s2">&quot;departments&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;departments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;|&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="p">))]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;real_name(s)&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">bad_dep</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;VPSA&quot;</span><span class="p">,</span> <span class="s2">&quot;VPAF&quot;</span><span class="p">,</span> <span class="s2">&quot;SVPA&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;VPAA&quot;</span><span class="p">,</span> <span class="s2">&quot;LIBR&quot;</span><span class="p">,</span> <span class="s2">&quot;VPA-&quot;</span><span class="p">,</span> <span class="s2">&quot;DIT-&quot;</span><span class="p">,</span> 
+               <span class="s2">&quot;VPR-&quot;</span><span class="p">,</span> <span class="s2">&quot;IT-N&quot;</span><span class="p">,</span> <span class="s2">&quot;VPUR&quot;</span><span class="p">,</span> <span class="s2">&quot;IT-I&quot;</span><span class="p">]</span>
+    <span class="c1"># drops potential matches belonging to &quot;bad departments&quot;, essentially those who don&#39;t teach</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">bad_dep</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;departments&quot;</span><span class="p">]:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>From here, we now have a user based confirmation system. The code will display all of the potential matches detected by method above for each of the 655 missing PlanetTerp professors, prompting the user to either confirm that none of the potential matches are the person we are looking for or give the index in the dataframe of the correct match.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#left_copy = left_only.copy() # uncomment this when you want to start over</span>
+<span class="c1">#left_rename = pd.DataFrame(columns = left_copy.columns)  # uncomment this when you want to start over</span>
+
+<span class="n">left_copy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/left_remaining.csv&#39;</span><span class="p">)</span> <span class="c1"># uncomment this if you want to continue where you left off</span>
+<span class="n">left_rename</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/renamed_lefts.csv&#39;</span><span class="p">)</span> <span class="c1"># uncomment this if you want to continue where you left off</span>
+
+
+<span class="n">responses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">,</span><span class="s2">&quot;no&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+<span class="c1"># go 10 at a time, saving progress each time</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">left_copy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">last</span> <span class="o">=</span>  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># the courses taught and semesters they taught in are displayed to better help decided if potential matches are</span>
+    <span class="c1"># actually the same person</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;course&quot;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;semester&quot;</span><span class="p">])</span>
+    <span class="n">similar</span> <span class="o">=</span> <span class="n">find_similar</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;course&quot;</span><span class="p">],</span> <span class="n">outer</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">similar</span><span class="o">.</span><span class="n">empty</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>      
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">similar</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+        <span class="c1"># if the user confirms no matches, we move on</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">):</span>
+            <span class="n">left_copy</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># if the user confirms a match, the match is recorded and renamed so that it can then be joined later</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">left_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">left_rename</span> <span class="o">=</span> <span class="n">left_rename</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">left_copy</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">left_copy</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">left_copy</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">clear_output</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/renamed_lefts.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/left_remaining.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">left_rename</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;src/2_clean_data/renamed_lefts.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">left_copy</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/left_remaining.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In the end, we only found 2 matches using this system. These were Ebonie Cooper-Jean and Naghmeh Momeni, who were both listed in the Diamondback with last names that were slightly different than what was listed on PlanetTerp. The other 653 PlanetTerp professors were either Ph. D. candidates, graduate teaching assistants, assistant professors, or lecturers, none of which are listed in the Diamondback. As such, these data points were dropped, and the 2 matches that we were able to find were added to our database.</p>
+
+</div>
+</div>
+</div>
 </div>
 </body>
 
