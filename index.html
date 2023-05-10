@@ -14635,6 +14635,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <li><a href="#matching-names">Matching Names</a></li>
 <li><a href="#getting-departments">Getting Departments</a></li>
 <li><a href="#missing-professors">Missing Professors</a></li>
+<li><a href="#professors-with-missing-years">Professors with Missing Years</a></li>
 </ul>
 </li>
 </ul>
@@ -17342,6 +17343,144 @@ HBUS
 </div>
 </div>
 </div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Professors-with-Missing-Years-">Professors with Missing Years <a class="anchor" id="professors-with-missing-years" /><a class="anchor-link" href="#Professors-with-Missing-Years-">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Another thing that we have to consider is professors who are listed as having taught in a specific year on PlanetTerp, but lack salary data in the Diamondback. To solve this, we looked for any professor that matched these conditions in our combined data. We then can use the same method from before, where users were prompted with a list of potential matches and could confirm whether or not there were any actual matches.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">combined_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/combined_data_remaining.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;years_taught&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;semester&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span><span class="s1">&#39;course&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;salaries&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;departments&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">})</span>
+<span class="c1">#combined_data = pd.read_csv(f&#39;combined_data.csv&#39;)</span>
+<span class="n">salary_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/clean_salary_data.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;years_taught&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;salaries&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;departments&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">})</span>
+<span class="n">new_combine</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/new_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;years_taught&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;salaries&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">,</span> <span class="s1">&#39;departments&#39;</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">})</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">combined_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">semesters</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;semester&#39;</span><span class="p">]</span>
+    <span class="n">missing</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sem</span> <span class="ow">in</span> <span class="n">semesters</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sem</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="s2">&quot;fall&quot;</span> <span class="ow">in</span> <span class="n">sem</span><span class="p">:</span> 
+            <span class="n">year</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="o">&gt;=</span> <span class="mi">2013</span> <span class="ow">and</span> <span class="n">year</span> <span class="o">&lt;=</span> <span class="mi">2022</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;years_taught&quot;</span><span class="p">])</span> <span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">missing</span><span class="p">:</span>
+                <span class="n">missing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span> <span class="o">&gt;</span>  <span class="mi">0</span><span class="p">:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">similar</span> <span class="o">=</span> <span class="n">find_similar</span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="n">last</span><span class="p">,</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;course&quot;</span><span class="p">],</span> <span class="n">salary_data</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">similar</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">years</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;years_taught&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">years</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="n">missing</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;years: </span><span class="si">{</span><span class="n">years</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;missing years: </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">similar</span><span class="o">.</span><span class="n">to_html</span><span class="p">()))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">last</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">responses</span><span class="p">):</span>
+                <span class="n">new_years</span> <span class="o">=</span> <span class="n">similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="s1">&#39;years_taught&#39;</span><span class="p">]</span>
+                <span class="n">combined_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;years_taught&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_years</span><span class="p">)</span>
+
+                <span class="n">new_salaries</span> <span class="o">=</span> <span class="n">similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="s1">&#39;salaries&#39;</span><span class="p">]</span>
+                <span class="n">combined_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;salaries&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_salaries</span><span class="p">)</span>
+
+                <span class="n">new_departments</span> <span class="o">=</span> <span class="n">similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="s1">&#39;departments&#39;</span><span class="p">]</span>
+                <span class="n">combined_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="s1">&#39;departments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">new_departments</span><span class="p">)</span>
+
+                <span class="n">new_combine</span> <span class="o">=</span> <span class="n">new_combine</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combined_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">clear_output</span><span class="p">()</span>
+    <span class="n">combined_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/combined_data_remaining.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/new_combined_data.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">combined_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;combined_data_remaining.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">new_combine</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;new_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We found much greater success here than in our previous attempt at finding missing professors. We were able to find 30 matches this time, with the majority being people changing their names to their nicknames in the Diamondback database. This included going from Christopher to Chris, William to Bill, and Laurence to Larry. As for the rest of the professors who are lacking salary data in a year they are recorded as having taught, it seems like one possibility is a professor who stopped teaching halfway through the year. It seems like a professor's salary data is only listed on the Diamondback if they worked the full year, so someone teaching in the fall semester and then leaving for whatever reason would not show up. Other than that, it is possible that a student left their review a long time after they took a course, leading their review to be flagged under a semester that the professor didn't actually teach in. Either way, these data points will be dropped in the future, and our data will be fully cleaned.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/combined_data.csv&#39;</span><span class="p">)</span>
+<span class="n">changed_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/2_clean_data/new_combined_data.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;P KSHETRY&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;R APTER&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">changed_names</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">changed_names</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/2_clean_data/final_combine_data.csv&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;src/2_clean_data/final_combine_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 
