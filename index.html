@@ -14591,31 +14591,19 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     <!-- End of mathjax configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Analysis-of-Professor-Performance-at-UMD">Analysis of Professor Performance at UMD<a class="anchor-link" href="#Analysis-of-Professor-Performance-at-UMD">&#182;</a></h1><p>Collaborators: Albert Chen, Alex Chen, Aaron Lin, Srujan Penikelapati</p>
+<h1 id="Final-Tutorial:-Analysis-of-Professor-Performance-at-UMD">Final Tutorial: Analysis of Professor Performance at UMD<a class="anchor-link" href="#Final-Tutorial:-Analysis-of-Professor-Performance-at-UMD">&#182;</a></h1><p>Collaborators: Albert Chen, Alex Chen, Aaron Lin, Srujan Penikelapati</p>
 
 </div>
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<img src="sheena_sheep.png" alt="Sheena_Sheep" />
-
-</div>
-</div>
-</div>
-</div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14623,14 +14611,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">&#182;</a></h1><ul>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#data-collection">Data Collection</a><ul>
+<li><a href="#data-collection">Step 1: Data Collection</a><ul>
 <li><a href="#imports">Imports</a></li>
 <li><a href="#planetterp">PlanetTerp</a></li>
 <li><a href="#diamondback">Diamondback</a></li>
 <li><a href="#combining-planetterp-data">Combining PlanetTerp Data</a></li>
 </ul>
 </li>
-<li><a href="#data-cleaning">Data Cleaning</a><ul>
+<li><a href="#data-cleaning">Step 2: Data Cleaning</a><ul>
 <li><a href="#duplicates-in-diamondback">Duplicates in Diamondback</a></li>
 <li><a href="#matching-names">Matching Names</a></li>
 <li><a href="#getting-departments">Getting Departments</a></li>
@@ -14644,22 +14632,34 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Introduction-">Introduction <a class="anchor" id="introduction" /><a class="anchor-link" href="#Introduction-">&#182;</a></h1><p>Faculty are the lifeblood of any university. They conduct cutting-edge research to discover new insights that push the boundary of the field they are studying. They also teach classes, helping students learn new skills and knowledge that will benefit them in their professional lives. As in any occupation, professors vary in the quality of their research and their teaching ability, which directly impacts the quality of education that students who take their classes receive.</p>
-<p>Students understand the fact that their choice of professor for a course can be the difference between an engaging, informative semester or a less than pleasing experience. Prior to registration, students often check professor reviews, online posts regarding the class, grade distributions, and other sources of information to determine whose class to choose.</p>
-<p>The goal of this project is to see the connection between how effective a professor is and possible determining factors of their teaching ability. Using data science, we will review salary data, years of experience, and average student rating of professors here at the University of Maryland to see how they correlate with their average Grade Point Average (GPA) for students across their classes. For example, does a professor with a high salary and many years of experience at UMD reflect in higher student GPAs? Once we build a correlative model, we can also pose performative questions in reverse, like whether the University is getting the best 'bang-for-their-buck' given a professor's salary and their average GPA as compared to other professors in the same field.</p>
-<p>In this tutorial, we will be following the Data Science Lifecycle, as listed above in the Table of Contents, in order to go through and try and answer the questions we've laid out above.</p>
+<h1 id="Introduction-">Introduction <a class="anchor" id="introduction" /><a class="anchor-link" href="#Introduction-">&#182;</a></h1><p>Data science is an interdisciplinary field that involves the collection, cleaning, visualization, analysis, and interpretation of complex data sets. The ultimate goal of data science is to extract meaningful and actionable insights from data that can inform decision-making, and improve outcomes across a variety of industries. In this tutorial, we will using a data science project of our own to guide the reader through the data science lifecycle, which is listed above in the Table of Contents.</p>
+<p>Faculty are the lifeblood of any university. They conduct cutting-edge research to discover new insights that push the boundary of the field they are studying. They also teach classes, helping students learn new skills and knowledge that will benefit them in their professional lives. As in any occupation, professors vary in the quality of their research and their teaching ability. This directly impacts the quality of education that students who take their classes receive. Students understand this clearly and will spend hours looking for the right professor that will give them an engaging and informative semester.</p>
+<p>This is why we decided to analyze the effectiveness of professors at UMD. The analysis done in the project can answer questions that administrators and students have on the state of professors at UMD. For example, a UMD administrator might want to know whether a professor with a high salary and many years of experience at UMD teaches better than other professors. A student might be faced with picking between two professors teaching the same course, and want to know which one would would help them get a better GPA.</p>
+<p>To analyze the effectiveness of the professors, we decided to look at two independent variables: the number of years they've been teaching and the salary that they get paid. The dependent variable, effectiveness, will be measured by the professors' GPAs (Grade Point Average) and the student reviews. These two variables indicate how well the students understood the information, along with how effectively the professor taught a course.</p>
 
 </div>
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<img src="sheena_sheep.png" alt="Sheena_Sheep" />
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14670,19 +14670,19 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The first stage of the Data Science Lifecycle, Data Collection. During this stage, we will be setting up the data that we will use for the remainder of the project. We will mostly be obtaining the data that we need through requests to different databases found online, before storing them locally to be manipulated in the future.</p>
+<p>Data collection is the first and most critical step in the data science process. It involves gathering and organizing data from various sources. One popular method of collecting data is through GET requests, which are used to retrieve data from web applications via the HTTPS protocol. However, this process can be time consuming, as large amounts of data are being sent over the internet, so this data is downloaded and stored locally for us to use.</p>
 
 </div>
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14693,18 +14693,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>These are the various libraries that will be used throughout the course of this tutorial. This project utilizes Python and Jupyter notebook, with the goal being to use the <a href="https://pandas.pydata.org/">Pandas</a> library. This library allows us to store data in dataframes, allowing us to manipulate the data that we have efficiently and effectively, making it one the most important and frequently used libraries in this tutorial. The various other libraries help us retrieve, manage, and analyze our data.</p>
+<p>These are the various libraries that will be used throughout the course of this tutorial. This project utilizes Python and Jupyter notebook, with a majority of the data manipulation being done through the <a href="https://pandas.pydata.org/">Pandas</a> library. This library is  one the most important and frequently used libraries in this tutorial, as it allows us to store data in dataframes. These dataframes are similar to 2D matricies or tables, and the Pandas library has many built in functions that makes data manipulation efficient and effective. The various other libraries help us retrieve, manage, and analyze our data.</p>
 
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14733,18 +14733,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="PlanetTerp-">PlanetTerp <a class="anchor" id="planetterp" /><a class="anchor-link" href="#PlanetTerp-">&#182;</a></h3><p>Since we are looking for information on a professor's grade distributions and student-made reviews of that professor, <a href="https://planetterp.com/">PlanetTerp</a> was a natural place to look for the information we needed. The data there is specific to UMD and the website itself was made by students, who were generous enough to provide us a <a href="https://planetterp.com/api/">documented API</a> that we could use. We used GET requests to the PlanetTerp API in order to get the information from the website, before storing it into dataframes. However, we quickly discovered that performing all of these requests could take excessive amounts of time. As such, we decided to store our data into csv files and then read from those files locally rather than constantly re-requesting the website. We did this by checking if our csv files already existed, and if they did we could simply read from those files, only requesting from the site if the csv files we were looking for didn't exist. As such, all of the data used from here on out in this tutorial will be accurate up until April 28th, 2023, as that is the last time we actually requested information from PlanetTerp itself.</p>
+<h3 id="Data-Collection:-PlanetTerp-">Data Collection: PlanetTerp <a class="anchor" id="planetterp" /><a class="anchor-link" href="#Data-Collection:-PlanetTerp-">&#182;</a></h3><p>Since we are looking for information on a professor's grade distributions, student reviews of that professor, and the number of years a professor has been teaching, <a href="https://planetterp.com/">PlanetTerp</a> was a natural place to look for the information we needed. The data there is specific to UMD and the website itself was made by students, who were generous enough to provide us a <a href="https://planetterp.com/api/">documented API</a> that we could use. We used GET requests to the PlanetTerp API in order to get the information from the website, before storing it into dataframes. However, we quickly discovered that performing all of these requests could take excessive amounts of time. As such, we decided to store our data into csv files and then read from those files locally rather than constantly re-requesting the website. We did this by checking if our csv files already existed, and if they did we could simply read from those files, only requesting from the site if the csv files we were looking for didn't exist. As such, all of the data used from here on out in this tutorial will be accurate up until April 28th, 2023, as that is the last time we actually requested information from PlanetTerp itself.</p>
 
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14761,7 +14761,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14808,7 +14808,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14861,18 +14861,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Diamondback-">Diamondback <a class="anchor" id="diamondback" /><a class="anchor-link" href="#Diamondback-">&#182;</a></h3><p>The other information that we need is a way to find out how much a teacher is earning, as well as a general estimate for how long they've been teaching at the University of Maryland. <a href="https://dbknews.com/">The Diamondback</a> publishes a yearly <a href="https://salaryguide.dbknews.com/">salary guide</a>, which has its own <a href="https://api.dbknews.com/docs/#/salary">API</a>. From here, we were then able to perform the same process, using GET requests to read the salary data for each year from 2013 to 2022. This information not only tells us how much a certain professor got paid each year, but also allows us to deduct how long a professor has been working at UMD based on how many years they were getting paid. We also performed the same procedure of writing our data to csv files to read from locally, as all of these requests also took very long to perform. As such, like with PlanetTerp, the data used from here on out is accurate up until April 28th, 2023.</p>
+<h3 id="Diamondback-">Diamondback <a class="anchor" id="diamondback" /><a class="anchor-link" href="#Diamondback-">&#182;</a></h3><p>The other information that we need is a way to find out how much a teacher is earning at the University of Maryland. <a href="https://dbknews.com/">The Diamondback</a> published a <a href="https://salaryguide.dbknews.com/">salary guide</a> in 2022, which has its own <a href="https://api.dbknews.com/docs/#/salary">API</a>. From here, we were then able to perform the same process of using GET requests to read the salary data for each year from 2013 to 2022. However, it was slightly more complicated, since the API would only show the salary data one page (10 entries) at a time. This also contains data on all UMD employees, not just professors, so we will need to extract only the professors in the data cleaning sections. We also performed the same procedure of writing our data to csv files to read from locally, as all of these requests also took very long to perform. The data used from here on out is accurate up until 2022.</p>
 
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14880,7 +14880,43 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salaries_exist</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/salary_data/DB_combined_data.csv&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;function to download all of the data from the UMD Diamondback salary API&#39;&#39;&#39;</span>
+
+<span class="k">def</span> <span class="nf">get_salary_data</span><span class="p">():</span>
+
+    <span class="c1"># get years that api is valid for</span>
+    <span class="n">r_years</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.dbknews.com/salary/years&quot;</span><span class="p">)</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">r_years</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+    <span class="c1"># create empty dataframe</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># for each year, get salary data</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># get number of entries for each year</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
+        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># each page only has 10 entries, so keep requesting until all entries are collected</span>
+        <span class="k">while</span> <span class="n">page</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="c1"># get salary data for 1 page</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">page_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
+
+            <span class="c1"># remove division and title columns, modify department col, and add year</span>
+            <span class="n">page_df</span> <span class="o">=</span> <span class="n">page_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">year_df</span><span class="p">,</span> <span class="n">page_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># save entire year&#39;s data into separate csv</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;year </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> finished&quot;</span><span class="p">)</span>
+        <span class="n">year_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14888,7 +14924,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14896,7 +14932,27 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&#39;&#39;&#39;function to combine all of the yearly data from the UMD Diamondback salary API into one csv&#39;&#39;&#39;</span>
+
+<span class="k">def</span> <span class="nf">combine</span><span class="p">():</span>
+    <span class="c1"># get data for all of the years into one dataframe</span>
+    <span class="n">r_years</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.dbknews.com/salary/years&quot;</span><span class="p">)</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">r_years</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="c1"># read each of the csvs</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">)</span>
+        <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">year_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># group by professor and aggregate the rest of the data into one row</span>
+    <span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Employee&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">aggregate</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/DB_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="sd">&#39;&#39;&#39;helper function to aggregate years, salaries, and departments columns for each professor&#39;&#39;&#39;</span>
+<span class="k">def</span> <span class="nf">aggregate</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
     <span class="n">years</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="n">salaries</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="n">salaries</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">salaries</span><span class="p">]</span>
@@ -14918,51 +14974,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
         <span class="s1">&#39;salaries&#39;</span><span class="p">:</span> <span class="n">salaries</span><span class="p">,</span>
         <span class="s1">&#39;departments&#39;</span><span class="p">:</span> <span class="n">departments</span><span class="p">,</span>
     <span class="p">})</span>
-
-<span class="k">if</span> <span class="n">salaries_exist</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-    <span class="c1"># get years that api is valid for</span>
-    <span class="n">r_years</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.dbknews.com/salary/years&quot;</span><span class="p">)</span>
-    <span class="n">years</span> <span class="o">=</span> <span class="n">r_years</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
-
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-
-    <span class="c1"># for each year, get salary data</span>
-    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-        <span class="c1"># number of faculty</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
-        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">page</span> <span class="o">=</span> <span class="mi">0</span>
-
-        <span class="k">while</span> <span class="n">page</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
-            <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
-
-            <span class="c1"># get salary data for 1 page</span>
-            <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.dbknews.com/salary/year/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">?page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">page_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
-
-            <span class="c1"># remove division and title columns, modify department col, and add year</span>
-            <span class="n">page_df</span> <span class="o">=</span> <span class="n">page_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Division&#39;</span><span class="p">,</span> <span class="s2">&quot;Title&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;Department&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="n">stop</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-            <span class="n">page_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">page_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-            <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">year_df</span><span class="p">,</span> <span class="n">page_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;year </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> finished&quot;</span><span class="p">)</span>
-        <span class="n">year_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="c1"># get data for all of the years into one dataframe</span>
-    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
-        <span class="n">year_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">data.csv&#39;</span><span class="p">)</span>
-        <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">year_df</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span> <span class="n">year_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-    <span class="c1"># combine all of the information for a single professor into one row</span>
-    <span class="n">df_grouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;Employee&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">combine</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-
-    <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_grouped</span><span class="p">[</span><span class="s1">&#39;Employee&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-
-    <span class="n">df_grouped</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;src/1_collect_data/salary_data/DB_combined_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14970,7 +14981,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14978,7 +14989,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reviews_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_review_data.csv&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># open all of the downloaded data</span>
+<span class="n">reviews_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_review_data.csv&quot;</span><span class="p">)</span>
 <span class="n">grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/planet_terp_data/PT_grade_data.csv&quot;</span><span class="p">)</span>
 <span class="n">salaries_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;src/1_collect_data/salary_data/DB_combined_data.csv&quot;</span><span class="p">)</span>
 </pre></div>
@@ -14988,7 +15000,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15106,7 +15118,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15296,7 +15308,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15403,7 +15415,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15414,7 +15426,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15557,7 +15569,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15568,7 +15580,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15713,7 +15725,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15724,7 +15736,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15745,7 +15757,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15900,7 +15912,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15911,7 +15923,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16044,7 +16056,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16178,7 +16190,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16189,7 +16201,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16201,7 +16213,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16214,7 +16226,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16378,7 +16390,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16389,7 +16401,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16464,7 +16476,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16482,7 +16494,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16493,7 +16505,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16546,7 +16558,7 @@ BOTH: 2490
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16557,7 +16569,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16603,7 +16615,7 @@ BOTH: 2490
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16614,7 +16626,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16637,7 +16649,7 @@ BOTH: 2490
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16649,7 +16661,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16661,7 +16673,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16673,7 +16685,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16684,7 +16696,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16760,7 +16772,7 @@ BOTH: 2490
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16771,7 +16783,7 @@ BOTH: 2490
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16804,7 +16816,7 @@ BOTH: 2490
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16851,7 +16863,7 @@ HBUS
 
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16876,7 +16888,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16918,7 +16930,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16961,7 +16973,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16978,7 +16990,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16999,7 +17011,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17051,7 +17063,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17069,7 +17081,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17085,7 +17097,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17205,7 +17217,7 @@ HBUS
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17216,7 +17228,7 @@ HBUS
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17268,7 +17280,7 @@ HBUS
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17279,7 +17291,7 @@ HBUS
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17332,7 +17344,7 @@ HBUS
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17344,7 +17356,7 @@ HBUS
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17355,7 +17367,7 @@ HBUS
 </div>
 </div>
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17366,7 +17378,7 @@ HBUS
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17385,7 +17397,7 @@ HBUS
 </div>
 </div>
 
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17441,18 +17453,18 @@ HBUS
 </div>
 
 </div>
-<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We found much greater success here than in our previous attempt at finding missing professors. We were able to find 30 matches this time, with the majority being people changing their names to their nicknames in the Diamondback database. This included going from Christopher to Chris, William to Bill, and Laurence to Larry. As for the rest of the professors who are lacking salary data in a year they are recorded as having taught, it seems like one possibility is a professor who stopped teaching halfway through the year. It seems like a professor's salary data is only listed on the Diamondback if they worked the full year, so someone teaching in the fall semester and then leaving for whatever reason would not show up. Other than that, it is possible that a student left their review a long time after they took a course, leading their review to be flagged under a semester that the professor didn't actually teach in. Either way, these data points will be dropped in the future, and our data will be fully cleaned.</p>
+<p>We found much greater success here than in our previous attempt at finding missing professors. We were able to find 30 matches this time, with the majority being people changing their names to their nicknames in the Diamondback database. This included going from Christopher to Chris, William to Bill, and Laurence to Larry. As for the rest of the professors who are lacking salary data in a year they are recorded as having taught, it seems like one possibility is a professor who stopped teaching halfway through the year. It seems like a professor's salary data is only listed on the Diamondback if they worked the full year, so someone teaching in the fall semester and then leaving for whatever reason would not show up. Other than that, it is possible that a student left their review a long time after they took a course, leading their review to be flagged under a semester that the professor didn't actually teach in. Either way, these data points will be dropped in the future, and our data will be fully matched.</p>
 
 </div>
 </div>
 </div>
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
