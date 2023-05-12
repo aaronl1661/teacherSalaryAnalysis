@@ -222,32 +222,32 @@ MUSC,ARHU
 MUSA,ARHU
 NACS,BSOS
 GRAD,Graduate School
-Z116,Public Policy
+Z116,SPP
 NUTR,AGNR
  Z090,CMNS
 PHIL,ARHU
 PHAO,SPHL
 PHYS,CMNS
 PLSC,AGNR
-MPCI,Office of Undergraduate Studies
+MPCI,OUGS
 PMPM,ENGR
 Z063,ENGR
 MEPM,ENGR
 Z040,ENGR
 PSYC,BSOS
-MPPA,Public Policy
+MPPA,SPP
 PHPP,SPHL
-MAMG,Public Policy
-EXPM,Public Policy
-MAPO,Public Policy
-POSI,Public Policy
-LMPO,Public Policy
-BSWP,Public Policy
+MAMG,SPP
+EXPM,SPP
+MAPO,SPP
+POSI,SPP
+LMPO,SPP
+BSWP,SPP
 MPLA,BSOS
-Z033,Public Policy
-Z146,Public Policy
-Z147,Public Policy
-Z154,Public Policy
+Z033,SPP
+Z146,SPP
+Z147,SPP
+Z154,SPP
 BMQF,BMGT
 Z157,CMNS
 RDEV,ARCH
@@ -294,21 +294,21 @@ EDTL,EDUC
 TLPL,EDUC
 Z099,EDUC
 Z128,EDUC
-MPTE,Office of Undergraduate Studies
+MPTE,OUGS
 Z145,BMGT
-ENTS,Office of Undergraduate Studies
+ENTS,OUGS
 Z039,BSOS
 THPF,ARHU
 MFAT,ARHU
 MFAP,ARHU
-Z091,CMNS
+ Z091,CMNS
 URPD,ARCH
 WMST,ARHU
 HESI,EDUC
 EDHI,EDUC
 INST,INFO
 PHSC,SPHL
-GEMS,Office of Undergraduate Studies
+GEMS,OUGS
 BMGT,BMGT
 BULM,BMGT
 GERM,ARHU
@@ -316,29 +316,28 @@ ISRL,ARHU
 BUSO,BMGT
 ARHU,ARHU
 TDPS,ARHU
-UNIV,Office of Undergraduate Studies
+UNIV,OUGS
 PERS,ARHU
 ARAB,ARHU
-HACS,Office of Undergraduate Studies
+HACS,OUGS
 CCJS,BSOS
-FIRE,Office of Undergraduate Studies
-CPSD,Office of Undergraduate Studies
-CPSP,Office of Undergraduate Studies
-PLCY,School of Public Policy
+FIRE,OUGS
+CPSD,OUGS
+CPSP,OUGS
+PLCY,SPP
 AASP,BSOS
-HNUH,Office of Undergraduate Studies
+HNUH,OUGS
 BUFN,BMGT
 BUSI,BMGT
 MSML,CMNS
-HONR,Office of Undergraduate Studies
-PUAF,School of Public Policy
+HONR,OUGS
+PUAF,SPP
 BSCI,CMNS
 BIOL,CMNS
-HDCC,Office of Undergraduate Studies
+HDCC,OUGS
 LGBT,ARHU
 EDUC,EDUC
 TLTC,EDUC
-CPMS,EDUC
 ENES,ENGR
 HEBR,ARHU
 EDCP,EDUC
@@ -369,9 +368,9 @@ BSOS,BSOS
 SPHL,SPHL
 BUDT,BMGT
 CHSE,EDUC
-HHUM,Office of Undergraduate Studies
-CPSF,Office of Undergraduate Studies
-AAST,Office of Undergraduate Studies
+HHUM,OUGS
+CPSF,OUGS
+AAST,OUGS
 EPIB,SPHL
 BUAC,BMGT
 HLSC,EDUC
@@ -380,44 +379,45 @@ HLMN,BMGT
 MLAW,BSOS
 AGNR,AGNR
 EDPS,EDUC
-UMEI,Office of Undergraduate Studies
+UMEI,OUGS
 BEES,CMNS
 LATN,ARHU
 IMMR,ARHU
 BIOM,CMNS
 URSP,ARCH
-CPBE,Office of Undergraduate Studies
+CPBE,OUGS
 IMDM,ARHU
 CINE,ARHU
 FILM,ARHU
 NFSC,AGNR
-CPSS,Office of Undergraduate Studies
+CPSS,OUGS
 AGST,AGNR
 DATA,BSOS
 RUSS,ARHU
-CPGH,Office of Undergraduate Studies
+CPGH,OUGS
 RELS,ARHU
 BSST,BSOS
 WGSS,ARHU
-CPJT,Office of Undergraduate Studies
+CPJT,OUGS
 JAPN,ARHU
 ITAL,ARHU
 LACS,ARHU
 GREK,ARHU
 LASC,ARHU
-BSGC,Office of Undergraduate Studies
-CPSA,Office of Undergraduate Studies
-BSCV,Office of Undergraduate Studies
-CPSN,Office of Undergraduate Studies
-HGLO,Office of Undergraduate Studies
+BSGC,OUGS
+CPSA,OUGS
+BSCV,OUGS
+CPSN,OUGS
+HGLO,OUGS
 HEIP,BMGT
 PEER,SPHL
 ENEB,EDUC
 BMSO,BMGT
-CPSG,Office of Undergraduate Studies
-HBUS,Office of Undergraduate Studies
-CPPL,Office of Undergraduate Studies
+CPSG,OUGS
+HBUS,OUGS
+CPMS,EDUC
+CPPL,OUGS
 ENBC,ENGR
 SLAA,ARHU
-CPET,Office of Undergraduate Studies
+CPET,OUGS
 KORA,ARHU
